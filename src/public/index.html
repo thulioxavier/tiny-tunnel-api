@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Route Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Route Manager</h1>
+    <form id="route-form">
+      <input type="text" id="prefix" placeholder="Prefix" required />
+      <input type="text" id="upstream" placeholder="Upstream" required />
+      <input type="text" id="rewritePrefix" placeholder="Rewrite Prefix" />
+      <button type="submit">Add Route</button>
+    </form>
+    <h2>Existing Routes</h2>
+    <ul id="routes-list"></ul>
+    <script src="app.js"></script>
+  </body>
+</html>

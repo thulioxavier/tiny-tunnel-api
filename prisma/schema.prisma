@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Routes {
+  id            String    @id @default(cuid())
+  upstream      String
+  rewritePrefix String
+  prefix        String    @unique()
+  isAuth        Boolean   @default(false)
+  jwtSecrets    String
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime? @default(now()) @updatedAt()
+
+  @@map("routes")
+}
