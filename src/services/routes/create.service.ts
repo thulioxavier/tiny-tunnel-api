@@ -9,7 +9,5 @@ export const Create = async (
     data,
   });
 
-  exec("./restart.sh");
-
   return route;
 };
