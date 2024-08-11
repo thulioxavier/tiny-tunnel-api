@@ -6,11 +6,12 @@ import { dbClient } from "../config/database/client";
 export const ProxyConfig = async (app: FastifyInstance) => {
   const proxies: Routes[] | [] = (await dbClient.routes.findMany()) ?? [];
 
-  proxies.forEach(({ upstream, prefix, rewritePrefix }) => {
+  proxies.forEach(({ upstream, prefix, rewritePrefix, httpMethods }) => {
     app.register(fastifyHttpProxy, {
       upstream,
       prefix,
       rewritePrefix,
+      httpMethods: JSON.parse(httpMethods),
     });
   });
 };

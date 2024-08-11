@@ -7,7 +7,7 @@ export const Create = async (
 ) => {
   
   const {prefix, ...body} = data;
-  const prefixSlug = prefix.replace(" ", "-");
+  const prefixSlug = prefix.replace(/\s+/g, "-");
 
   const route = await dbClient.routes.create({
     data: {

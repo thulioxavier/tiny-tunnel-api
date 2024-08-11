@@ -13,9 +13,10 @@ export const CreateRouter = async (
     prefix: z.string(),
     isAuth: z.boolean(),
     jwtSecretsEnv: z.string(),
+    httpMethods: z.array(z.enum(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD']))
   });
 
-  const { isAuth, jwtSecretsEnv, prefix, rewritePrefix, upstream } = schema.parse(
+  const { isAuth, jwtSecretsEnv, prefix, rewritePrefix, upstream, httpMethods } = schema.parse(
     request.body
   );
 
@@ -25,6 +26,7 @@ export const CreateRouter = async (
     prefix,
     rewritePrefix,
     upstream,
+    httpMethods: JSON.stringify(httpMethods)
   });
 
   request.log.info({ action: 'Route successfully created', output });
