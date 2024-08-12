@@ -39,4 +39,13 @@ export const GetAllRoutes = async (request: FastifyRequest,
   const output = await Routes.GetAllRoutes();
 
   reply.send(output);
+};
+
+export const DeleteRouter = async (request: FastifyRequest,
+  reply: FastifyReply) => {
+  const { routerId } = request.params as { routerId: string };
+
+  const output = await Routes.DeleteRouter(routerId)
+
+  reply.send(output);
 }

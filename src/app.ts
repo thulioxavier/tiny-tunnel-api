@@ -36,6 +36,8 @@ const app = fastify({
   }
 });
 
+app.register(ProxyConfig);
+
 app.register(fastifySwagger, {
   swagger: {
     info: {
@@ -65,8 +67,6 @@ app.register(
     prefix: '/tiny-tunnel'
   }
 );
-
-app.register(ProxyConfig);
 
 app.setErrorHandler((error, request, reply) => {
   if (error instanceof fastify.errorCodes.FST_ERR_BAD_STATUS_CODE) {

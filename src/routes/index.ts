@@ -1,7 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { CreateRouter, GetAllRoutes } from "../http/controllers/routes.controller";
+import { CreateRouter, DeleteRouter, GetAllRoutes } from "../http/controllers/routes.controller";
 import { RestartService } from "../http/index.controller";
-import { object, string } from "zod";
 
 export const EndPointsRoutes = async (app: FastifyInstance) => {
   app.post("/create", {
@@ -37,4 +36,5 @@ export const EndPointsRoutes = async (app: FastifyInstance) => {
   }, CreateRouter);
   app.get("/routes", GetAllRoutes);
   app.get('/restart', RestartService);
+  app.delete('/delete/:routerId', DeleteRouter);
 };
