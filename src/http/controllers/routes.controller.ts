@@ -6,19 +6,25 @@ export const CreateRouter = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-
   const schema = z.object({
     upstream: z.string().url(),
     rewritePrefix: z.string(),
     prefix: z.string(),
     isAuth: z.boolean(),
     jwtSecretsEnv: z.string(),
-    httpMethods: z.array(z.enum(['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD']))
+    httpMethods: z.array(
+      z.enum(["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"])
+    ),
   });
 
-  const { isAuth, jwtSecretsEnv, prefix, rewritePrefix, upstream, httpMethods } = schema.parse(
-    request.body
-  );
+  const {
+    isAuth,
+    jwtSecretsEnv,
+    prefix,
+    rewritePrefix,
+    upstream,
+    httpMethods,
+  } = schema.parse(request.body);
 
   const output = await Routes.Create({
     isAuth,
@@ -26,26 +32,30 @@ export const CreateRouter = async (
     prefix,
     rewritePrefix,
     upstream,
-    httpMethods: JSON.stringify(httpMethods)
+    httpMethods: JSON.stringify(httpMethods),
   });
 
-  request.log.info({ action: 'Route successfully created', output });
+  request.log.info({ action: "Route successfully created", output });
 
   reply.status(201).send(output);
 };
 
-export const GetAllRoutes = async (request: FastifyRequest,
-  reply: FastifyReply) => {
+export const GetAllRoutes = async (
+  request: FastifyRequest,
+  reply: FastifyReply
+) => {
   const output = await Routes.GetAllRoutes();
 
   reply.send(output);
 };
 
-export const DeleteRouter = async (request: FastifyRequest,
-  reply: FastifyReply) => {
+export const DeleteRouter = async (
+  request: FastifyRequest,
+  reply: FastifyReply
+) => {
   const { routerId } = request.params as { routerId: string };
 
-  const output = await Routes.DeleteRouter(routerId)
+  const output = await Routes.DeleteRouter(routerId);
 
   reply.send(output);
-}
+};

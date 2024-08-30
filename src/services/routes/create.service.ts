@@ -1,9 +1,8 @@
 import { Routes } from "@prisma/client";
 import { dbClient } from "../../config/database/client";
-import { exec } from "child_process";
 
 export const Create = async (
-  data: Omit<Routes, "id" | "createdAt" | "updatedAt">
+  data: Omit<Routes, "id" | "createdAt" | "updatedAt" | "deletedAt">
 ) => {
   
   const {prefix, ...body} = data;
