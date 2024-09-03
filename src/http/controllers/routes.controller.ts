@@ -13,7 +13,7 @@ export const CreateRouter = async (
     isAuth: z.boolean(),
     jwtSecretsEnv: z.string(),
     httpMethods: z.array(
-      z.enum(["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"])
+      z.enum(["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD", "*"])
     ),
   });
 
