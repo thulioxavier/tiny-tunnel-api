@@ -37,29 +37,28 @@ export const ProxyConfig = async (app: FastifyInstance) => {
           throw new Error(`JWT secret for ${jwtSecretsEnv} is not defined`);
         }
 
-        // Verifique se o JWT já foi registrado
         if (!jwtSecrets.has(jwtSecret)) {
           app.register(fastifyJwt, {
             secret: jwtSecret,
           });
 
-          jwtSecrets.add(jwtSecret); // Adicione o JWT ao conjunto
+          jwtSecrets.add(jwtSecret);
         }
 
-        if (app.hasDecorator(`authenticate-${jwtSecret}-${id}`)) {
+        if (!app.hasDecorator("authenticate")) {
           app.decorate(
-            `authenticate-${jwtSecret}-${id}`,
+            "authenticate",
             async (request: FastifyRequest, reply: FastifyReply) => {
               try {
                 await request.jwtVerify();
                 request.headers["x-user"] = JSON.stringify(request.user);
+                console.log(JSON.stringify(request.user));
               } catch (err) {
                 reply.send(err);
               }
             }
           );
         }
-
         proxyOptions.preHandler = app.authenticate;
       }
 
