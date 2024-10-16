@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts",
-    "kill:port": "kill $(lsof -t -i:5000)"
+    "kill:port": "kill $(lsof -t -i:5000)",
+    "build": "tsc"
   },
   "dependencies": {
     "@fastify/auth": "^4.6.1",
